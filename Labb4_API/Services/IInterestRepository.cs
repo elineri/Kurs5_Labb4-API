@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Labb4_API.Services
 {
-    interface IInterestRepository<T>
+    public interface IInterestRepository<T>
     {
         Task<IEnumerable<T>> GetAll();
         Task<T> GetSingle(int id);
