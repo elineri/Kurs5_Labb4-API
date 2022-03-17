@@ -34,19 +34,29 @@ namespace Labb4_API.Services
             return null;
         }
 
-        public Task<IEnumerable<Person>> GetAll()
+        public async Task<IEnumerable<Person>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _interestContext.Persons.ToListAsync();
         }
 
-        public Task<Person> GetSingle(int id)
+        public async Task<Person> GetSingle(int id)
         {
-            throw new NotImplementedException();
+            return await _interestContext.Persons.FirstOrDefaultAsync(p => p.PersonId == id);
         }
 
-        public Task<Person> Update(Person entity)
+        public async Task<Person> Update(Person entity)
         {
-            throw new NotImplementedException();
+            var result = await _interestContext.Persons.FirstOrDefaultAsync(p => p.PersonId == entity.PersonId);
+            if (result != null)
+            {
+                result.FirstName = entity.FirstName;
+                result.LastName = entity.LastName;
+                result.PhoneNumber = entity.PhoneNumber;
+
+                await _interestContext.SaveChangesAsync();
+                return result;
+            }
+            return null;
         }
     }
 }
