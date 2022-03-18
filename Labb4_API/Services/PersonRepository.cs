@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Labb4_API.Services
 {
-    public class PersonRepository : IInterestRepository<Person>
+    public class PersonRepository : IInterest<Person>
     {
         private InterestDbContext _interestContext;
         public PersonRepository(InterestDbContext interestDbContext)

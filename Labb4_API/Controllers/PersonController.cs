@@ -13,9 +13,9 @@ namespace Labb4_API.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        private IInterestRepository<Person> _interest;
+        private IInterest<Person> _interest;
 
-        public PersonController(IInterestRepository<Person> interest)
+        public PersonController(IInterest<Person> interest)
         {
             _interest = interest;
         }

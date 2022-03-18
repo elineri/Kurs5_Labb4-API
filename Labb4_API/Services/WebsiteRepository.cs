@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Labb4_API.Services
 {
-    public class WebsiteRepository : IInterestRepository<Website>
+    public class WebsiteRepository : IInterest<Website>
     {
         private InterestDbContext _interestContext;
         public WebsiteRepository(InterestDbContext interestDbContext)
