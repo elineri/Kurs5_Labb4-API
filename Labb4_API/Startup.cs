@@ -1,4 +1,6 @@
 using Labb4_API.Model;
+using Labb4_API.Services;
+using Labb4_Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +33,8 @@ namespace Labb4_API
 
             // EF SQL
             services.AddDbContext<InterestDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
+
+            services.AddScoped<IInterest<Person>, PersonRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

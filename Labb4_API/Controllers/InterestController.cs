@@ -11,17 +11,17 @@ namespace Labb4_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonController : ControllerBase
+    public class InterestController : ControllerBase
     {
-        private IInterest<Person> _interest;
+        private IInterest<Interest> _interest;
 
-        public PersonController(IInterest<Person> interest)
+        public InterestController(IInterest<Interest> interest)
         {
             _interest = interest;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProduct()
+        public async Task<IActionResult> GetAllInterests()
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Labb4_API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(int id)
+        public async Task<ActionResult<Interest>> GetInterest(int id)
         {
             try
             {
@@ -48,21 +48,22 @@ namespace Labb4_API.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error to retrive data from database");
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error to retrieve data from database");
             }
         }
 
         [HttpPost]
-        public async Task<ActionResult<Person>> CreateNewPerson(Person newPerson)
+        public async Task<ActionResult<Interest>> CreateNewInterest(Interest newInterest)
         {
             try
             {
-                if (newPerson == null)
+                if (newInterest == null)
                 {
-                    return BadRequest();
+                    BadRequest();
                 }
-                var createdPerson = await _interest.Add(newPerson);
-                return CreatedAtAction(nameof(GetPerson), new { id = createdPerson.PersonId }, createdPerson);
+                var createdInterest = await _interest.Add(newInterest);
+                return CreatedAtAction(nameof(GetInterest), new { id = newInterest.InterestId }, createdInterest);
             }
             catch (Exception)
             {
@@ -72,7 +73,7 @@ namespace Labb4_API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Person>> Delete(int id)
+        public async Task<ActionResult<Interest>> Delete(int id)
         {
             try
             {
@@ -89,29 +90,5 @@ namespace Labb4_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error to delete data to database");
             }
         }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Person>> UpdatePerson(int id, Person person)
-        {
-            try
-            {
-                if (id != person.PersonId)
-                {
-                    return BadRequest("Person id doesn't match");
-                }
-                var personToUpdate = await _interest.GetSingle(id);
-                if (personToUpdate == null)
-                {
-                    return NotFound($"Product with id {id} not found");
-                }
-                return await _interest.Update(person);
-            }
-            catch (Exception)
-            {
-
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error to update data to database");
-            }
-        }
-
     }
 }

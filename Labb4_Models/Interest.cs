@@ -13,6 +13,6 @@ namespace Labb4_Models
         public string InterestName { get; set; }
         [Required]
         public string Description { get; set; }
-        public ICollection<PersonInterestLink> PersonInterestLinks { get; set; }
+        //public ICollection<PersonInterestLink> PersonInterestLinks { get; set; }
     }
 }

@@ -15,6 +15,6 @@ namespace Labb4_Models
         public string LastName { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
-        public ICollection<PersonInterestLink> PersonInterestLinks { get; set; }
+        //public ICollection<PersonInterestLink> PersonInterestLinks { get; set; }
     }
 }
