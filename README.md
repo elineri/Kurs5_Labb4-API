@@ -13,7 +13,8 @@ Get all interests connected to a specific person
 - To change person write another id ".../person[id]
 
 Get all links connected to a specific person
-- To be added
+- https://localhost:44363/api/website/person2
+- To change person write another id ".../person[id]
 
 Connect a person to a new interest
 - To be added
