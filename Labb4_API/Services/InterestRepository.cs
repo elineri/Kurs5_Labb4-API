@@ -46,13 +46,22 @@ namespace Labb4_API.Services
 
         public async Task<IEnumerable<Interest>> InterestsPerPerson(int personId)
         {
-            var personInterest = await (from pil in _interestContext.PersonInterestLinks
+            var personresult = await (from pil in _interestContext.PersonInterestLinks
                                   join i in _interestContext.Interests on pil.InterestId equals i.InterestId
                                   join p in _interestContext.Persons on pil.PersonId equals p.PersonId
                                   where pil.PersonId == personId
                                   select i).Distinct().ToListAsync();
-                    
-            return personInterest;
+            if (personresult != null)
+            {
+                return personresult;
+            }
+
+            return null;
+        }
+
+        public Task<IEnumerable<Interest>> WebsitesPerPerson(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Interest> Update(Interest entity)

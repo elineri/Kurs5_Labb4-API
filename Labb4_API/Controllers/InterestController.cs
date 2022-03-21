@@ -39,7 +39,12 @@ namespace Labb4_API.Controllers
         {
             try
             {
-                return Ok(await _interest.InterestsPerPerson(id));
+                var result = await _interest.InterestsPerPerson(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
             }
             catch (Exception)
             {
@@ -48,7 +53,7 @@ namespace Labb4_API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<Interest>> GetInterest(int id)
         {
             try

@@ -49,6 +49,11 @@ namespace Labb4_API.Services
             throw new NotImplementedException();
         }
 
+        public Task<IEnumerable<Person>> WebsitesPerPerson(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Person> Update(Person entity)
         {
             var result = await _interestContext.Persons.FirstOrDefaultAsync(p => p.PersonId == entity.PersonId);

@@ -13,5 +13,6 @@ namespace Labb4_API.Services
         Task<T> Update(T entity);
         Task<T> Delete(int id);
         Task<IEnumerable<T>> InterestsPerPerson(int id);
+        Task<IEnumerable<T>> WebsitesPerPerson(int id);
     }
 }

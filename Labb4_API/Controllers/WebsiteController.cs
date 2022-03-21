@@ -94,5 +94,24 @@ namespace Labb4_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error to update data to database");
             }
         }
+
+        [HttpGet("person{id}")]
+        public async Task<IActionResult> GetWebsitesPerPerson(int id)
+        {
+            try
+            {
+                var result = await _interest.WebsitesPerPerson(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error to retrieve data from database");
+            }
+        }
     }
 }

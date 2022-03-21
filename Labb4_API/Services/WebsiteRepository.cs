@@ -49,6 +49,21 @@ namespace Labb4_API.Services
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<Website>> WebsitesPerPerson(int personId)
+        {
+            var personresult = await(from pil in _interestContext.PersonInterestLinks
+                                     join w in _interestContext.Websites on pil.WebsiteId equals w.WebsiteId
+                                     join p in _interestContext.Persons on pil.PersonId equals p.PersonId
+                                     where pil.PersonId == personId
+                                     select w).Distinct().ToListAsync();
+            if (personresult != null)
+            {
+                return personresult;
+            }
+
+            return null;
+        }
+
         public async Task<Website> Update(Website entity)
         {
             var result = await _interestContext.Websites.FirstOrDefaultAsync(p => p.WebsiteId == entity.WebsiteId);
