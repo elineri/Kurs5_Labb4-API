@@ -44,6 +44,11 @@ namespace Labb4_API.Services
             return await _interestContext.Persons.FirstOrDefaultAsync(p => p.PersonId == id);
         }
 
+        public Task<IEnumerable<Person>> InterestsPerPerson(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Person> Update(Person entity)
         {
             var result = await _interestContext.Persons.FirstOrDefaultAsync(p => p.PersonId == entity.PersonId);

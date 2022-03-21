@@ -79,7 +79,7 @@ namespace Labb4_API.Controllers
                 var interestToDelete = await _interest.GetSingle(id);
                 if (interestToDelete == null)
                 {
-                    return NotFound($"Product with id {id} not found");
+                    return NotFound($"Person with id {id} not found");
                 }
                 return await _interest.Delete(id);
             }

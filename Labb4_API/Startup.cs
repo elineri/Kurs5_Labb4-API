@@ -35,6 +35,8 @@ namespace Labb4_API
             services.AddDbContext<InterestDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
 
             services.AddScoped<IInterest<Person>, PersonRepository>();
+            services.AddScoped<IInterest<Interest>, InterestRepository>();
+            services.AddScoped<IInterest<Website>, WebsiteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

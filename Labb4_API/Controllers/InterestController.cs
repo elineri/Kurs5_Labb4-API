@@ -34,6 +34,20 @@ namespace Labb4_API.Controllers
             }
         }
 
+        [HttpGet("person{id}")]
+        public async Task<IActionResult> GetInterestsPerPerson(int id)
+        {
+            try
+            {
+                return Ok(await _interest.InterestsPerPerson(id));
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error to retrieve data from database");
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Interest>> GetInterest(int id)
         {
@@ -80,7 +94,7 @@ namespace Labb4_API.Controllers
                 var interestToDelete = await _interest.GetSingle(id);
                 if (interestToDelete == null)
                 {
-                    return NotFound($"Product with id {id} not found");
+                    return NotFound($"Interest with id {id} not found");
                 }
                 return await _interest.Delete(id);
             }
@@ -88,6 +102,29 @@ namespace Labb4_API.Controllers
             {
 
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error to delete data to database");
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Interest>> UpdateInterest(int id, Interest interest)
+        {
+            try
+            {
+                if (id != interest.InterestId)
+                {
+                    return BadRequest("Interest id doesn't match");
+                }
+                var interestToUpdate = await _interest.GetSingle(id);
+                if (interestToUpdate == null)
+                {
+                    return NotFound($"Interest with id {id} not found");
+                }
+                return await _interest.Update(interest);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error to update data to database");
             }
         }
     }

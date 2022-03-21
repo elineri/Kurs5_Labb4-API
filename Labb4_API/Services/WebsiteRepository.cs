@@ -44,6 +44,11 @@ namespace Labb4_API.Services
             return await _interestContext.Websites.FirstOrDefaultAsync(p => p.WebsiteId == id);
         }
 
+        public Task<IEnumerable<Website>> InterestsPerPerson(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Website> Update(Website entity)
         {
             var result = await _interestContext.Websites.FirstOrDefaultAsync(p => p.WebsiteId == entity.WebsiteId);
