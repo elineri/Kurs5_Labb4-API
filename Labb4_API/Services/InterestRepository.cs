@@ -10,7 +10,7 @@ namespace Labb4_API.Services
 {
     public class InterestRepository : IInterest<Interest>
     {
-        private InterestDbContext _interestContext;
+        private readonly InterestDbContext _interestContext;
         public InterestRepository(InterestDbContext interestDbContext)
         {
             _interestContext = interestDbContext;
@@ -77,5 +77,43 @@ namespace Labb4_API.Services
             }
             return null;
         }
+
+        public async Task<Interest> AddPersonInterest(Interest newEntity, int id)
+        {
+            //var result = await _interestContext.PersonInterestLinks.AddAsync(newEntity);
+            //await _interestContext.SaveChangesAsync();
+            //return result.Entity;
+            //var resultInterest = await _interestContext.PersonInterestLinks.AddAsync(interestId);
+            //var resultPerson = await _interestContext.PersonInterestLinks.AddAsync(personId);
+
+            //var result = await _interestContext.Interests.AddAsync(newEntity);
+            //await _interestContext.SaveChangesAsync();
+            //return result.Entity;
+
+            //--------------
+            //var result = await _interestContext.PersonInterestLinks.AddAsync(new PersonInterestLink { InterestId = interestId, PersonId = personId });
+
+            //await _interestContext.SaveChangesAsync();
+            //return result;
+
+            // -------
+            //var result = await _interestContext.PersonInterestLinks.AddAsync(newEntity);
+            //await _interestContext.SaveChangesAsync();
+            //return result.Entity;
+
+            var resultP = await _interestContext.Persons.FirstOrDefaultAsync(p => p.PersonId == id);
+            if (resultP != null)
+            {
+                var result = await _interestContext.Interests.AddAsync(newEntity);
+                await _interestContext.SaveChangesAsync();
+
+                await _interestContext.PersonInterestLinks.AddAsync(new PersonInterestLink { InterestId = result.Entity.InterestId, PersonId = id });
+                await _interestContext.SaveChangesAsync();
+
+                return result.Entity;
+            }
+            return null;
+        }
+
     }
 }

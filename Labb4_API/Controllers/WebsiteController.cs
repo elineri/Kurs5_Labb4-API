@@ -13,7 +13,7 @@ namespace Labb4_API.Controllers
     [ApiController]
     public class WebsiteController : ControllerBase
     {
-        private IInterest<Website> _interest;
+        private readonly IInterest<Website> _interest;
 
         public WebsiteController(IInterest<Website> interest)
         {

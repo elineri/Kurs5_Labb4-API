@@ -13,7 +13,7 @@ namespace Labb4_API.Controllers
     [ApiController]
     public class InterestController : ControllerBase
     {
-        private IInterest<Interest> _interest;
+        private readonly IInterest<Interest> _interest;
 
         public InterestController(IInterest<Interest> interest)
         {
@@ -130,6 +130,30 @@ namespace Labb4_API.Controllers
             {
 
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error to update data to database");
+            }
+        }
+
+        [HttpPost("person{id}")]
+        public async Task<ActionResult<Interest>> NewPersonInterest(Interest newInterest, int id)
+        {
+            try
+            {
+                if (newInterest == null)
+                {
+                    BadRequest();
+                }
+                var createdPersonInterest = await _interest.AddPersonInterest(newInterest, id);
+                return CreatedAtAction(nameof(GetInterest), new { id = createdPersonInterest.InterestId}, createdPersonInterest);
+                //var createdPersonInterest = await _interest.Add(PersonInterestLink });
+                //return CreatedAtAction(nameof(GetInterest), new { id = newPerson. }, createdInterest);
+
+                //var createdPersonInterest = await _interest.AddPersonInterest(newInterest);
+                //return CreatedAtAction(new PersonInterestLink { InterestId = newPIL.InterestId, PersonId = newPIL.PersonId}, createdPersonInterest);
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Labb4_API.Services
 {
     public class WebsiteRepository : IInterest<Website>
     {
-        private InterestDbContext _interestContext;
+        private readonly InterestDbContext _interestContext;
         public WebsiteRepository(InterestDbContext interestDbContext)
         {
             _interestContext = interestDbContext;
@@ -51,14 +51,15 @@ namespace Labb4_API.Services
 
         public async Task<IEnumerable<Website>> WebsitesPerPerson(int personId)
         {
-            var personresult = await(from pil in _interestContext.PersonInterestLinks
-                                     join w in _interestContext.Websites on pil.WebsiteId equals w.WebsiteId
-                                     join p in _interestContext.Persons on pil.PersonId equals p.PersonId
-                                     where pil.PersonId == personId
-                                     select w).Distinct().ToListAsync();
-            if (personresult != null)
+            var personResult = await (from pil in _interestContext.PersonInterestLinks
+                                      join w in _interestContext.Websites on pil.WebsiteId equals w.WebsiteId
+                                      join p in _interestContext.Persons on pil.PersonId equals p.PersonId
+                                      where pil.PersonId == personId
+                                      select w).Distinct().ToListAsync();
+
+            if (personResult != null)
             {
-                return personresult;
+                return personResult;
             }
 
             return null;
@@ -76,6 +77,11 @@ namespace Labb4_API.Services
                 return result;
             }
             return null;
+        }
+
+        public Task<Website> AddPersonInterest(Website newEntity, int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

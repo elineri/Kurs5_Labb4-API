@@ -10,7 +10,7 @@ namespace Labb4_API.Services
 {
     public class PersonRepository : IInterest<Person>
     {
-        private InterestDbContext _interestContext;
+        private readonly InterestDbContext _interestContext;
         public PersonRepository(InterestDbContext interestDbContext)
         {
             _interestContext = interestDbContext;
@@ -67,6 +67,11 @@ namespace Labb4_API.Services
                 return result;
             }
             return null;
+        }
+
+        public Task<Person> AddPersonInterest(Person newEntity, int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
