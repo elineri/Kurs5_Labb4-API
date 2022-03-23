@@ -73,5 +73,10 @@ namespace Labb4_API.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<Person> AddPersonWebsite(Person newEntity, int personId, int interestId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

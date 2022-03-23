@@ -144,11 +144,6 @@ namespace Labb4_API.Controllers
                 }
                 var createdPersonInterest = await _interest.AddPersonInterest(newInterest, id);
                 return CreatedAtAction(nameof(GetInterest), new { id = createdPersonInterest.InterestId}, createdPersonInterest);
-                //var createdPersonInterest = await _interest.Add(PersonInterestLink });
-                //return CreatedAtAction(nameof(GetInterest), new { id = newPerson. }, createdInterest);
-
-                //var createdPersonInterest = await _interest.AddPersonInterest(newInterest);
-                //return CreatedAtAction(new PersonInterestLink { InterestId = newPIL.InterestId, PersonId = newPIL.PersonId}, createdPersonInterest);
             }
             catch (Exception)
             {

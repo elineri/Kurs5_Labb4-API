@@ -83,5 +83,23 @@ namespace Labb4_API.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task<Website> AddPersonWebsite(Website newEntity, int personId, int interestId)
+        {
+            var resultP = await _interestContext.Persons.FirstOrDefaultAsync(p => p.PersonId == personId);
+            var resultI = await _interestContext.Interests.FirstOrDefaultAsync(i => i.InterestId == interestId);
+            if (resultP != null && resultI != null)
+            {
+                var result = await _interestContext.Websites.AddAsync(newEntity);
+                await _interestContext.SaveChangesAsync();
+
+                await _interestContext.PersonInterestLinks.AddAsync(
+                    new PersonInterestLink { InterestId = interestId, PersonId = personId, WebsiteId = result.Entity.WebsiteId });
+                await _interestContext.SaveChangesAsync();
+
+                return result.Entity;
+            }
+            return null;
+        }
     }
 }

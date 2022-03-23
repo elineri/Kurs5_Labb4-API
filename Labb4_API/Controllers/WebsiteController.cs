@@ -113,5 +113,24 @@ namespace Labb4_API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error to retrieve data from database");
             }
         }
+
+        [HttpPost("person{personId}interest{interestId}")]
+        public async Task<ActionResult<Website>> NewPersonWebsite(Website newWebsite, int personId, int interestId)
+        {
+            try
+            {
+                if (newWebsite == null)
+                {
+                    BadRequest();
+                }
+                var createdPersonWebsite = await _interest.AddPersonWebsite(newWebsite, personId, interestId);
+                return CreatedAtAction(nameof(GetWebsite), new { id = createdPersonWebsite.WebsiteId }, createdPersonWebsite);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

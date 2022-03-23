@@ -16,5 +16,6 @@ namespace Labb4_API.Services
         Task<IEnumerable<T>> WebsitesPerPerson(int id);
 
         Task<T> AddPersonInterest(T newEntity, int id);
+        Task<T> AddPersonWebsite(T newEntity, int personId, int interestId);
     }
 }
