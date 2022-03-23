@@ -17,7 +17,13 @@ Get all links connected to a specific person
 - To change person write another id ".../person[id]
 
 Connect a person to a new interest
-- To be added
+- https://localhost:44363/api/interest/person2
+- To change person write another id ".../person[id]
+- In the body select raw and JSON. And add new interest with the code below:
+  {
+        "interestName": "Test5",
+        "description": "Test description5"
+  }
 
 Add new links for a specific person and a specific interest
 - To be added
