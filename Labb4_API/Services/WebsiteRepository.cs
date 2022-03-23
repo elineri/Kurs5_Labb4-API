@@ -100,6 +100,37 @@ namespace Labb4_API.Services
                 return result.Entity;
             }
             return null;
+
+            #region Test
+            //var resultP = await _interestContext.Persons.FirstOrDefaultAsync(p => p.PersonId == personId);
+            //var resultI = await _interestContext.Interests.FirstOrDefaultAsync(i => i.InterestId == interestId);
+
+            //var resultPI = await (from pi in _interestContext.PersonInterestLinks
+            //                      where pi.PersonId == personId && pi.InterestId == interestId && pi.WebsiteId == null
+            //                      select pi).FirstOrDefaultAsync();
+
+            //if (resultP != null && resultI != null)
+            //{
+            //    var result = await _interestContext.Websites.AddAsync(newEntity);
+            //    await _interestContext.SaveChangesAsync();
+
+            //    if (resultPI != null)
+            //    {
+            //        resultPI.WebsiteId = result.Entity.WebsiteId;
+
+            //        return resultPI.Website;
+            //    }
+            //    else
+            //    {
+            //        await _interestContext.PersonInterestLinks.AddAsync(
+            //        new PersonInterestLink { InterestId = interestId, PersonId = personId, WebsiteId = result.Entity.WebsiteId });
+            //        await _interestContext.SaveChangesAsync();
+
+            //        return result.Entity;
+            //    }
+            //}
+            //return null;
+            #endregion
         }
     }
 }

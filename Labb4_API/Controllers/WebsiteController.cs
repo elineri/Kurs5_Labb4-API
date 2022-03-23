@@ -129,7 +129,7 @@ namespace Labb4_API.Controllers
             catch (Exception)
             {
 
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error to add data to database");
             }
         }
     }
