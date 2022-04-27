@@ -1,7 +1,7 @@
 # LABB 4
 
 ## INDTRODUCTION
-This is a school assignment for my school work. The assignment was to create a simple web-API with REST. 
+This is a school assignment for my school work. The assignment was to create a simple web-API with REST.  
 
 ## API CALLS
 Get all people in the system [GET]
